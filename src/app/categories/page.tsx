@@ -9,7 +9,7 @@ import SelectedCategoryHandler from "./SelectedCategoryHandler";
 import { componentsList, ComponentItem, ComponentFile } from "../components/ComponentsList";
 
 const uiComponents = [
-  "Accordions", "AI Chats", "Alerts", "Avatars", "Badges",
+  "Accordions", "AI", "Alerts", "Avatars", "Badges",
   "Buttons", "Cards", "Tabs", "Modals", "Dropdowns",
   "Inputs", "Forms", "Tables", "Carousels",
 ];
@@ -76,7 +76,7 @@ export default function CategoriesPage() {
 
         {/* Main */}
         <div className="flex-1">
-          <h1 className="text-6xl font-bold text-gray-800 text-center pt-20 pb-10">
+          <h1 className="text-6xl font-bold text-gray-800 text-center pt-6 pb-10">
             Categories
           </h1>
 

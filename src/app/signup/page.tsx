@@ -1,5 +1,6 @@
 'use client';
 
+import { Link } from 'lucide-react';
 import React, { useState } from 'react';
 
 export default function SignupPage() {
@@ -46,7 +47,9 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 
       {/* Navbar */}
       <header className="relative z-10 flex items-center justify-between px-6 md:px-12 py-6 backdrop-blur-md bg-white/5 border-b border-white/10">
-        <div className="text-xl md:text-2xl font-semibold">Evalyze</div>
+        <Link href="/" className="text-2xl font-semibold hover:opacity-80 transition">
+          Evalyze
+        </Link>
         <div>
           <a
             href="/login"

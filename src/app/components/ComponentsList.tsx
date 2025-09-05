@@ -21,7 +21,7 @@ export const componentsList: ComponentItem[] = [
   description: "Responsive pricing tables with tiers and call-to-action.",
   tags: ["Marketing", "UI"],
   image:
-    "https://images.unsplash.com/photo-1667539916754-968bd0977c12?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "/pricing-table.png",
   files: [
     {
       fileName: "demo.tsx",
@@ -482,7 +482,7 @@ export const TimelineContent = <T extends keyof HTMLElementTagNameMap = "div">({
     description: "Split's text in animated pattern.",
     tags: ["Animation", "UI"],
     image:
-      "https://images.unsplash.com/photo-1594844862885-f0a64d371deb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "/split-text.png",
     files: [
         {
             fileName: "demo.tsx",
@@ -723,7 +723,7 @@ export default SplitText;
     description: "Beautiful hero layouts with gradients and imagery.",
     tags: ["Landing Page", "Marketing"],
     image:
-      "https://images.unsplash.com/photo-1556707752-481d500a2c58?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "/hero-section.png",
     files: [
       {
         fileName: "dependency",
@@ -909,7 +909,7 @@ export { HeroSection }
     description: "Accessible accordion component with smooth animations.",
     tags: ["UI", "Accordions"],
     image:
-      "https://images.unsplash.com/photo-1530950774950-6376cbdcf385?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "/accordion.png",
       files: [
         {
           fileName: "demo.tsx",
@@ -918,37 +918,150 @@ export { HeroSection }
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
+} from "@/components/ui/accordion";
 
-function AccordionDemo() {
+const items = [
+  {
+    id: "1",
+    title: "What makes Origin UI different?",
+    content:
+      "Origin UI focuses on developer experience and performance. Built with TypeScript, it offers excellent type safety, follows accessibility standards, and provides comprehensive documentation with regular updates.",
+  },
+  {
+    id: "2",
+    title: "How can I customize the components?",
+    content:
+      "Use our CSS variables for global styling, or className and style props for component-specific changes. We support CSS modules, Tailwind, and dark mode out of the box.",
+  },
+  {
+    id: "3",
+    title: "Is Origin UI optimized for performance?",
+    content:
+      "Yes, with tree-shaking, code splitting, and minimal runtime overhead. Most components are under 5KB gzipped.",
+  },
+  {
+    id: "4",
+    title: "How accessible are the components?",
+    content:
+      "All components follow WAI-ARIA standards, featuring proper ARIA attributes, keyboard navigation, and screen reader support. Regular testing ensures compatibility with NVDA, VoiceOver, and JAWS.",
+  },
+];
+
+function Component() {
   return (
-    <Accordion type="single" collapsible className="w-full max-w-[400px]">
-      <AccordionItem value="item-1">
-        <AccordionTrigger>Is it accessible?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It adheres to the WAI-ARIA design pattern.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTrigger>Is it styled?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It comes with default styles that matches the other
-          components&apos; aesthetic.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionTrigger>Is it animated?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It&apos;s animated by default, but you can disable it if you
-          prefer.
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
-  )
+    <div className="space-y-4 max-w-[400px]">
+      <h2 className="text-xl font-bold">W/ chevron</h2>
+      <Accordion type="single" collapsible className="w-full" defaultValue="3">
+        {items.map((item) => (
+          <AccordionItem value={item.id} key={item.id} className="py-2">
+            <AccordionTrigger className="py-2 text-[15px] leading-6 hover:no-underline">
+              {item.title}
+            </AccordionTrigger>
+            <AccordionContent className="pb-2 text-muted-foreground">
+              {item.content}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </div>
+  );
 }
 
-export { AccordionDemo };
+export { Component };
+
 `
+        },
+        {
+          fileName: "accordion.tsx",
+          code: `"use client";
+
+import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import * as React from "react";
+
+import { cn } from "@/lib/utils";
+import { ChevronDownIcon } from "@radix-ui/react-icons";
+
+const Accordion = AccordionPrimitive.Root;
+
+const AccordionItem = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
+>(({ className, ...props }, ref) => (
+  <AccordionPrimitive.Item
+    ref={ref}
+    className={cn("border-b border-border", className)}
+    {...props}
+  />
+));
+AccordionItem.displayName = "AccordionItem";
+
+const AccordionTrigger = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
+>(({ className, children, ...props }, ref) => (
+  <AccordionPrimitive.Header className="flex">
+    <AccordionPrimitive.Trigger
+      ref={ref}
+      className={cn(
+        "flex flex-1 items-center justify-between py-4 text-left font-semibold transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+      <ChevronDownIcon
+        width={16}
+        height={16}
+        strokeWidth={2}
+        className="shrink-0 opacity-60 transition-transform duration-200"
+        aria-hidden="true"
+      />
+    </AccordionPrimitive.Trigger>
+  </AccordionPrimitive.Header>
+));
+AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
+
+const AccordionContent = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <AccordionPrimitive.Content
+    ref={ref}
+    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    {...props}
+  >
+    <div className={cn("pb-4 pt-0", className)}>{children}</div>
+  </AccordionPrimitive.Content>
+));
+
+AccordionContent.displayName = AccordionPrimitive.Content.displayName;
+
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger };
+`
+        },
+        {
+          fileName: "tailwind.config.js",
+          code: `/** @type {import('tailwindcss').Config} */
+module.exports = {
+  theme: {
+    extend: {
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+    },
+  },
+}`
         }
       ]
   },
@@ -958,7 +1071,7 @@ export { AccordionDemo };
     description: "Dismissible alert banner for notifications and warnings.",
     tags: ["UI", "Alerts"],
     image:
-      "https://images.unsplash.com/photo-1692871152386-ce4343fc6260?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "/alert-banner.png",
     files: [
       {
         fileName: "demo.tsx",
@@ -1114,7 +1227,7 @@ export { Alert, AlertTitle, AlertDescription, AlertContent }
     description: "Different styled buttons with hover/active states.",
     tags: ["UI", "Buttons"],
     image:
-      "https://images.unsplash.com/flagged/photo-1578728890856-8bbf3883aa6d?q=80&w=714&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "/button-variants.png",
     files: [
       {
         fileName: "demo.tsx",
@@ -1411,7 +1524,7 @@ export const Spinner = ({ size = 20, color = "#8f8f8f" }: SpinnerProps) => {
     description: "Call-to-action layouts for conversions.",
     tags: ["Marketing", "CTA"],
     image:
-      "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=755&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "/cta-block.png",
     files: [
       {
         fileName: "demo.tsx",
@@ -1653,7 +1766,7 @@ export { Button, buttonVariants }
     site: "reactbits.dev",
     description: "Keyboard-accessible tab components with smooth transitions.",
     tags: ["UI", "Tabs"],
-    image: "https://images.pexels.com/photos/6193327/pexels-photo-6193327.jpeg",
+    image: "/tabs.png",
     files: [
       {
         fileName: "demo.tsx",
@@ -2168,7 +2281,7 @@ export { Badge, BadgeButton, BadgeDot, badgeVariants };
     site: "reactbits.dev",
     description: "Accessible modal dialog with backdrop and focus trap.",
     tags: ["UI", "Modals"],
-    image: "https://images.pexels.com/photos/29766159/pexels-photo-29766159.jpeg",
+    image: "/modal.png",
     files: [
       {
         fileName: "demo.tsx",
@@ -2365,7 +2478,7 @@ export default function BasicModal({
     description: "Customizable dropdown menu with animations.",
     tags: ["UI", "Dropdowns"],
     image:
-      "https://cdn.vectorstock.com/i/1000x1000/23/63/dropdown-menu-website-element-vector-19402363.jpg",
+      "/dropdown.png",
     files: [
       {
         fileName: "demo.tsx",
@@ -2746,7 +2859,7 @@ export { Button, buttonVariants };
     site: "21st.dev",
     description: "Ready-to-use form layouts for signups and logins.",
     tags: ["UI", "Forms"],
-    image: "https://images.pexels.com/photos/955392/pexels-photo-955392.jpeg",
+    image: "/form-layout.png",
     files: [
       {
         fileName: "demo.tsx",
@@ -3738,7 +3851,7 @@ export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
     description: "Styled and validated input fields with states.",
     tags: ["UI", "Inputs"],
     image:
-      "https://images.pexels.com/photos/31466991/pexels-photo-31466991.jpeg",
+      "/input-field.png",
     files: [
       {
         fileName: "demo.tsx",
@@ -3789,7 +3902,7 @@ export default function ExampleInput() {
     description: "Responsive tables with sorting and filtering.",
     tags: ["UI", "Tables"],
     image:
-      "https://cdn.vectorstock.com/i/1000v/95/35/data-table-template-blue-yellow-vector-26829535.avif",
+      "/data-table.png",
     files: [
       {
         fileName: "demo.tsx",
@@ -4007,7 +4120,7 @@ export { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, Tabl
     description: "Touch-enabled carousel slider component.",
     tags: ["UI", "Carousels"],
     image:
-      "https://cdn.vectorstock.com/i/1000v/79/14/smartphone-carousel-post-vector-24497914.avif",
+      "/carousel.png",
     files: [
       {
         fileName: "usage.tsx",
@@ -4154,7 +4267,7 @@ export default function BasicCarousel() {
     description: "Circular avatar component with fallback initials.",
     tags: ["UI", "Avatars"],
     image:
-      "https://cdn.vectorstock.com/i/1000v/18/44/diverse-people-avatar-collection-vector-42791844.avif",
+      "/avatar.png",
     files: [
       {
         fileName: "demo.tsx",
@@ -4253,7 +4366,7 @@ export { Avatar, AvatarFallback, AvatarImage };
     description: "Compact badges for labeling and highlighting items.",
     tags: ["UI", "Badges"],
     image:
-      "https://images.unsplash.com/photo-1565828842574-d1f6923d9ec5?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "/badge.png",
     files: [
       {
         fileName: "demo.tsx",
@@ -4332,7 +4445,7 @@ export { Badge, badgeVariants }
   description: "List with scroll animation",
   tags: ["List", "UI"],
   image:
-    "https://images.unsplash.com/photo-1667539916754-968bd0977c12?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "/animated-list.png",
   files: [
     {
       fileName: "usage.tsx",
@@ -4563,7 +4676,7 @@ export default AnimatedList
     description: "Compact badges for labeling and highlighting items.",
     tags: ["UI", "Badges"],
     image:
-      "https://images.unsplash.com/photo-1565828842574-d1f6923d9ec5?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "/rotating-text.png",
     files: [
       {
         fileName: "usage.tsx",
@@ -4826,7 +4939,7 @@ export default RotatingText;
     description: "Rectangular shape blurred on hovering",
     tags: ["UI", "Shape"],
     image:
-      "https://cdn.vectorstock.com/i/1000v/18/44/diverse-people-avatar-collection-vector-42791844.avif",
+      "/shape-blur.png",
     files: [
       {
         fileName: "usage.tsx",
@@ -5115,9 +5228,9 @@ export default ShapeBlur;
     name: "AI Chats",
     site: "reactbits.dev",
     description: "AI prompt input area",
-    tags: ["UI", "Input"],
+    tags: ["UI", "Input", "AI"],
     image:
-      "https://cdn.vectorstock.com/i/1000v/79/14/smartphone-carousel-post-vector-24497914.avif",
+      "/prompt.png",
     files: [
       {
         fileName: "demo.tsx",

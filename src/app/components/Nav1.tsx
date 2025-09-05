@@ -56,7 +56,7 @@ export default function Nav1() {
       {/* Left: Logo */}
       <div className="flex items-center gap-2">
         <Link href="/">
-          <span className="font-bold text-3xl text-gray-800 ml-10 cursor-pointer">
+          <span className="font-bold text-3xl text-gray-800 ml-10 hover:opacity-90 cursor-pointer">
             Evalyze
           </span>
         </Link>
@@ -112,20 +112,20 @@ export default function Nav1() {
         {isAuthenticated ? (
           <div
             ref={profileRef}
-            className="flex items-center gap-4 bg-[#defff8] px-4 py-2 rounded-xl shadow-md mr-30 cursor-pointer select-none"
+            className="flex items-center gap-1 bg-[#defff8] px-4 py-2 rounded-xl shadow-md mr-40 cursor-pointer select-none"
             onClick={() => setShowDropdown((prev) => !prev)}
           >
             <img
               src={user.image || "/default-avatar.avif"}
               alt="User Avatar"
-              className="w-10 h-10 rounded-full"
+              className="w-8 h-10 rounded-full"
             />
             <span className="font-semibold text-gray-800">{user.name}</span>
 
             {/* Dropdown */}
             {showDropdown && (
               <div
-                className="absolute top-full right-0 mt-2 w-28 mr-25 bg-white rounded-md shadow-lg border border-gray-200"
+                className="absolute top-full right-0 mt-2 w-28 mr-35 bg-white rounded-md shadow-lg border border-gray-200"
                 style={{ zIndex: 20 }}
               >
                 <button

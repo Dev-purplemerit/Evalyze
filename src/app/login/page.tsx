@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -40,7 +41,9 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gradient-to-br from-[#0a0120] via-[#120344] to-[#1c014d] text-white flex flex-col">
       {/* Navbar */}
       <header className="flex items-center justify-between px-6 md:px-12 py-6 backdrop-blur-md bg-white/5 border-b border-white/10 z-10">
-        <div className="text-2xl font-semibold">Evalyze</div>
+        <Link href="/" className="text-2xl font-semibold hover:opacity-80 transition">
+          Evalyze
+        </Link>
         <a
           href="/signup"
           className="px-5 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium shadow-md hover:opacity-90 transition"
