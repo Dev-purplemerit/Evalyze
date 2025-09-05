@@ -6,12 +6,14 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  async function handleSubmit(e: any) {
+async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
     setMessage("");
 
-    const formData = new FormData(e.target);
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+
     const data = {
       fullName: formData.get("fullName"),
       email: formData.get("email"),

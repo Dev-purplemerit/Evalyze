@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { ChevronDown, X } from "lucide-react";
 import Nav1 from "../components/Nav1";
+import { Variants } from "framer-motion";
 
 export default function Blog() {
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
@@ -71,13 +72,17 @@ This means smarter and more confident purchase decisions.`,
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 40, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { type: "spring", stiffness: 80, damping: 12 },
+      transition: {
+        type: "spring",  // this is now a proper literal type
+        stiffness: 80,
+        damping: 12,
+      },
     },
   };
 

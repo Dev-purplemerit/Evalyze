@@ -49,9 +49,9 @@ export default function TermsOfService() {
 
           <div>
             <h2 className="text-xl font-semibold mb-2">6. Disclaimer of Warranties</h2>
-            <p>
-              The platform is provided "as is" and we make no warranties regarding its accuracy, reliability, or availability.
-            </p>
+              <p>
+                The platform is provided &quot;as is&quot; and we make no warranties regarding its accuracy, reliability, or availability.
+              </p>
           </div>
 
           <div>

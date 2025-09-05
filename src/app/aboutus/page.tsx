@@ -3,6 +3,7 @@
 import Nav1 from "../components/Nav1";
 import PageSection from "../components/PageSection";
 import { motion } from "framer-motion";
+import { Variants } from "framer-motion";
 
 export default function AboutUs() {
   const containerVariants = {
@@ -13,15 +14,19 @@ export default function AboutUs() {
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { type: "spring", stiffness: 80, damping: 12 },
+  const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",  // this is now a proper literal type
+      stiffness: 80,
+      damping: 12,
     },
-  };
+  },
+};
 
   return (
     <div className="bg-white text-black">

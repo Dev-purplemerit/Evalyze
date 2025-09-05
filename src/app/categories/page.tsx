@@ -1,36 +1,29 @@
-"use client";
-import { useState } from "react";
+'use client';
+
+import { useState, useCallback } from "react";
+import { Suspense } from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import SelectedCategoryHandler from "./SelectedCategoryHandler";
 import { componentsList, ComponentItem, ComponentFile } from "../components/ComponentsList";
 
 const uiComponents = [
-  "Accordions",
-  "AI Chats",
-  "Alerts",
-  "Avatars",
-  "Badges",
-  "Buttons",
-  "Cards",
-  "Tabs",
-  "Modals",
-  "Dropdowns",
-  "Inputs",
-  "Forms",
-  "Tables",
-  "Carousels",
+  "Accordions", "AI Chats", "Alerts", "Avatars", "Badges",
+  "Buttons", "Cards", "Tabs", "Modals", "Dropdowns",
+  "Inputs", "Forms", "Tables", "Carousels",
 ];
 
 export default function CategoriesPage() {
-  const searchParams = useSearchParams();
-  const selectedFromURL = searchParams.get("selected");
-
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(
-    selectedFromURL ? [selectedFromURL] : []
-  );
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
+
+  // Handle selected query param from Suspense-wrapped client component
+  const handleSelectedFromURL = useCallback((selected: string | null) => {
+    if (selected && !selectedCategories.includes(selected)) {
+      setSelectedCategories([selected]);
+    }
+  }, [selectedCategories]);
 
   // Filter components
   const filteredComponents =
@@ -61,6 +54,11 @@ export default function CategoriesPage() {
           <div className="text-2xl font-bold text-gray-900">Evalyze</div>
         </Link>
       </header>
+
+      {/* Suspense wrapper for search param handler */}
+      <Suspense fallback={null}>
+        <SelectedCategoryHandler onSelected={handleSelectedFromURL} />
+      </Suspense>
 
       <div className="min-h-screen bg-white flex">
         {/* Sidebar */}
@@ -169,7 +167,7 @@ function Row({
   );
 }
 
-// Normal Card
+// Card
 function Card({
   item,
   onClick,
@@ -204,7 +202,7 @@ function Card({
   );
 }
 
-// Expanded Card with code tabs
+// ExpandedCard
 function ExpandedCard({
   item,
   onClose,
@@ -213,22 +211,21 @@ function ExpandedCard({
   onClose: () => void;
 }) {
   const [activeFileIndex, setActiveFileIndex] = useState(0);
-      const [copied, setCopied] = useState(false);
-    const command = "npx shadcn@latest";
+  const [copied, setCopied] = useState(false);
+  const command = "npx shadcn@latest";
 
-    const handleCopy = async () => {
-      try {
-        await navigator.clipboard.writeText(command);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000); // reset after 2 sec
-      } catch (err) {
-        console.error("Failed to copy:", err);
-      }
-    };
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(command);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
 
   return (
     <div className="rounded-3xl overflow-hidden border border-gray-300 shadow-lg relative bg-white">
-      {/* Image */}
       <Image
         src={item.image}
         alt={item.name}
@@ -236,7 +233,6 @@ function ExpandedCard({
         height={500}
         className="w-full h-96 object-cover"
       />
-      {/* Close button */}
       <div className="absolute top-4 right-4">
         <button
           onClick={onClose}
@@ -246,7 +242,6 @@ function ExpandedCard({
         </button>
       </div>
 
-      {/* Info */}
       <div className="p-8">
         <h2 className="text-3xl font-bold mb-2">{item.name}</h2>
         <p className="text-gray-700 mb-6">{item.description}</p>
@@ -257,10 +252,8 @@ function ExpandedCard({
           {copied ? "Copied!" : "npx shadcn@latest"}
         </button>
 
-        {/* Code files */}
         {item.files && item.files.length > 0 && (
           <div className="mt-6">
-            {/* File tabs */}
             <div className="flex space-x-2 mb-4 overflow-x-auto">
               {item.files.map((file: ComponentFile, idx: number) => (
                 <button
@@ -277,7 +270,6 @@ function ExpandedCard({
               ))}
             </div>
 
-            {/* Code panel */}
             <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
               <code>{item.files[activeFileIndex].code}</code>
             </pre>
