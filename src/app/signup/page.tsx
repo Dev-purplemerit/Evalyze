@@ -64,18 +64,18 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         <div className="w-full lg:w-1/4 space-y-6 text-gray-300 text-center lg:text-left">
           <div>
             <p className="text-lg font-semibold">Email</p>
-            <p className="text-base">info@constellation.ai</p>
+            <p className="text-base">help@evalyze.com</p>
           </div>
           <div>
             <p className="text-lg font-semibold">Location</p>
             <p className="text-base leading-relaxed">
-              45 Constellation Tower, Innovation Street, London, UK
+              Banglore, India
             </p>
           </div>
           <div>
             <p className="text-lg font-semibold">Social Media</p>
-            <p className="text-base">@constellation.ai</p>
-            <p className="text-base">constellation</p>
+            <p className="text-base">@evalyze</p>
+            <p className="text-base">Evalyze</p>
           </div>
         </div>
 

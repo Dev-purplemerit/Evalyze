@@ -55,16 +55,16 @@ export default function LoginPage() {
         <div className="hidden md:flex flex-col space-y-6 text-gray-300 w-72">
           <div>
             <p className="font-semibold">Email</p>
-            <p>info@constellation.ai</p>
+            <p>help@evalyze.com</p>
           </div>
           <div>
             <p className="font-semibold">Location</p>
-            <p className="leading-relaxed">45 Constellation Tower, Innovation Street, London, UK</p>
+            <p className="leading-relaxed">Banglore, India</p>
           </div>
           <div>
             <p className="font-semibold">Social Media</p>
-            <p>@constellation.ai</p>
-            <p>constellation</p>
+            <p>@evalyze</p>
+            <p>Evalyze</p>
           </div>
         </div>
 
