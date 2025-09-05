@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* globals.css */
+
+:root {
+  --font-heading: var(--font-archivo-black);
+  --font-body: var(--font-poppins);
+}
+
+body {
+  font-family: var(--font-poppins), sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-archivo-black), sans-serif;
+}
+
+
+/* Global Dark Mode - OpenAI Style 
+html, body {
+  @apply bg-black text-neutral-200;
+  font-family: 'Inter', sans-serif;
+}*/
+
+/* Headings 
+h1, h2, h3, h4, h5, h6 {
+  @apply text-white font-semibold;
+}
+  */
+
+/* Links 
+a {
+  @apply text-neutral-300 hover:text-white transition-colors;
+}
+  */
+
+/* Inputs 
+input, textarea, select {
+  @apply bg-black text-white border border-neutral-800 rounded-md px-3 py-2;
+}
+
+input::placeholder, textarea::placeholder {
+  @apply text-neutral-500;
+}
+  */
+
+/* Buttons 
+button {
+  @apply bg-white text-black rounded-md px-4 py-2 font-medium hover:bg-neutral-200 transition;
+} */
+
+/* Cards / Containers (scoped, not global divs!) 
+.container,
+.card,
+form {
+  @apply bg-black text-neutral-200;
+}
+  */
