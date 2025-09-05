@@ -51,7 +51,7 @@ export default function CategoriesPage() {
     <div>
       <header className="w-full px-10 py-6 bg-white shadow-sm border-b border-gray-200 cursor-pointer">
         <Link href="/">
-          <div className="text-2xl font-bold text-gray-900">Evalyze</div>
+          <div className="text-2xl font-bold text-gray-900 hover:opacity-80">Evalyze</div>
         </Link>
       </header>
 
